@@ -1,0 +1,29 @@
+---
+import MagicShop from '../components/MagicShop.astro';
+let title = 'Astro City';
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{title}</title>
+    <link rel="stylesheet" href="/style/global.css">
+
+    <style>
+        body {
+            padding: 4rem 2rem;
+            width: 100%;
+            min-height: 100vh;
+            display: grid;
+            justify-content: center;
+            background: #f9fafb;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <MagicShop />
+    </main>
+</body>
+</html>

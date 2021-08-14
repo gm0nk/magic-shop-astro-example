@@ -1,0 +1,65 @@
+---
+const dataUrl = 'https://raw.githubusercontent.com/gm0nk/5etools/master/data/spells/spells-xge.json';
+
+// Инструкции ниже выполняются NodeJS во время сборки
+console.log("Полезный вывод в командную строку");
+
+// Запрашиваем необходимые данные о заклинаниях, используя await без async-функции
+const response = await fetch(dataUrl);
+const {spell: spells} = await response.json();
+
+// Вспомогательные функции
+const getRandomNumber = (a, b) => Math.floor(Math.random() * (b - a) + a);
+const getRandomSpells = (n) => {
+    let randomSpells = [];
+    for (let i = 0; i < n; i++) {
+        randomSpells.push(spells[getRandomNumber(0, spells.length)])
+    }
+    return randomSpells;
+}
+
+// Доступные для покупки свитки
+const scrolls = getRandomSpells(5);
+// Владелец магазина может поприветствовать покупателя одним из следующих способов 
+const welcomePhrases = [
+    "Welcome to our shop, traveller. I hope you find something useful here.",
+    "Sometimes even small peace of parchment can turn the tables. You should buy one!",
+    "Hello there! Only the best scrolls! High quality magic!"
+]
+---
+<!-- Локальные стили компонента -->
+<style lang="scss">
+/* Только стиль для ul будет глобальным */
+    :global(ul) {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .scrolls-for-sale {
+        li::before {
+            content: "📜";
+            margin-right: .3rem;
+        }
+    }
+
+    @for $i from 0 through 9 {
+        .item-name[data-level="#{$i}"] {
+            color: adjust-hue(#4903fc, $i*36deg);
+        }
+    }
+</style>
+
+<!-- Знакомый JSX синтаксис -->
+<div class="shop">
+    <h2>Magic shop</h2>
+    <p>{welcomePhrases[getRandomNumber(0, welcomePhrases.length)]}</p>
+    <ul class="scrolls-for-sale">
+        {scrolls.map((scroll) => (
+            <li>
+                <span class="item-name" data-level={scroll.level}>{`${scroll.name} `}</span>
+                <span class="item-price">{scroll.level * 100}G</span>
+            </li>
+        ))}
+    </ul>
+</div>
