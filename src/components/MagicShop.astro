@@ -62,7 +62,7 @@ const welcomePhrases = [
         {scrolls.map((scroll) => (
             <li>
                 <span class="item-name" data-level={scroll.level}>{`${scroll.name} `}</span>
-                <span class="item-price">{scroll.level * 100}G</span>
+                <span class="item-price">{scroll.level * 100 + (scroll.level? 0 : 20)}G</span>
             </li>
         ))}
     </ul>
