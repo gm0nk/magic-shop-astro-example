@@ -1,5 +1,9 @@
 ---
 const dataUrl = 'https://raw.githubusercontent.com/gm0nk/5etools/master/data/spells/spells-xge.json';
+const scrollsStock = {
+    min: 3,
+    max: 10
+}
 
 // Инструкции ниже выполняются NodeJS во время сборки
 console.log("Полезный вывод в командную строку");
@@ -19,7 +23,7 @@ const getRandomSpells = (n) => {
 }
 
 // Доступные для покупки свитки
-const scrolls = getRandomSpells(5);
+const scrolls = getRandomSpells(getRandomNumber(scrollsStock.min, scrollsStock.max + 1));
 // Владелец магазина может поприветствовать покупателя одним из следующих способов 
 const welcomePhrases = [
     "Welcome to our shop, traveller. I hope you find something useful here.",
