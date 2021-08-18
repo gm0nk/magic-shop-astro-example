@@ -1,9 +1,10 @@
 ---
 const dataUrl = 'https://raw.githubusercontent.com/gm0nk/5etools/master/data/spells/spells-xge.json';
-const scrollsStock = {
+const defaultScrollsStock = {
     min: 3,
     max: 10
 }
+const {stock: scrollsStock = defaultScrollsStock} = Astro.props;
 
 // Инструкции ниже выполняются NodeJS во время сборки
 console.log("Полезный вывод в командную строку");
@@ -56,7 +57,9 @@ const welcomePhrases = [
 
 <!-- Знакомый JSX синтаксис -->
 <div class="shop">
-    <h2>Magic shop</h2>
+    <slot name="shop-title">
+        <h2>Magic shop</h2>
+    </slot>
     <p>{welcomePhrases[getRandomNumber(0, welcomePhrases.length)]}</p>
     <ul class="scrolls-for-sale">
         {scrolls.map((scroll) => (

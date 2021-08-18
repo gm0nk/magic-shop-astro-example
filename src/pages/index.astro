@@ -23,7 +23,9 @@ let title = 'Astro City';
 </head>
 <body>
     <main>
-        <MagicShop />
+        <MagicShop stock={{min: 5, max: 5}}>
+            <h2 slot="shop-title">Invulnerable vagrant</h2>
+        </MagicShop>
     </main>
 </body>
 </html>
